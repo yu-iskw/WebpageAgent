@@ -16,7 +16,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "test": "pnpm test:typecheck && playwright test --config playwright.config.ts",
     "test:typecheck": "tsc --project tests/tsconfig.json"
   },
