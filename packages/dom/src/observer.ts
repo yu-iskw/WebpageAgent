@@ -1,4 +1,5 @@
 import { createLocator, getAccessibleName, getActions, getRole, isVisible } from './semantics.js';
+import { querySelectorAllDeep } from './traversal.js';
 
 import type { Observer, PageObservation, SemanticNode } from '@webpage-agent/core';
 
@@ -34,7 +35,7 @@ export class DomObserver implements Observer {
 
   observe(options?: { signal?: AbortSignal }): Promise<PageObservation> {
     options?.signal?.throwIfAborted();
-    const elements = [...this.#document.querySelectorAll(CANDIDATE_SELECTOR)].slice(
+    const elements = querySelectorAllDeep(this.#document, CANDIDATE_SELECTOR).slice(
       0,
       this.#maxNodes,
     );

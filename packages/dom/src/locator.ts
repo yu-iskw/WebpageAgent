@@ -1,4 +1,5 @@
 import { getAccessibleName, getRole, isVisible } from './semantics.js';
+import { querySelectorAllDeep } from './traversal.js';
 
 import type { StableLocator } from '@webpage-agent/core';
 
@@ -47,11 +48,11 @@ function collectCandidates(documentValue: Document, locator: StableLocator): Ele
   if (locator.fallbackCss) selectors.push(locator.fallbackCss);
   for (const selector of selectors) {
     try {
-      const matches = [...documentValue.querySelectorAll(selector)];
+      const matches = [...querySelectorAllDeep(documentValue, selector)];
       if (matches.length > 0) return matches;
     } catch {
       // A fallback is only a hint; malformed caller input must not prevent semantic resolution.
     }
   }
-  return [...documentValue.querySelectorAll('*')];
+  return [...querySelectorAllDeep(documentValue, '*')];
 }

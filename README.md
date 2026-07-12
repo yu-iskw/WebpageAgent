@@ -38,6 +38,7 @@ Prerequisites:
 ```bash
 corepack enable
 pnpm install
+pnpm --filter @webpage-agent/dom exec playwright install chromium
 pnpm build
 pnpm test
 ```
@@ -135,6 +136,8 @@ pnpm lint
 ```
 
 The repository uses Trunk for formatting and the broader lint/security harness. See [AGENTS.md](AGENTS.md) for repository conventions.
+
+DOM integration tests run the actual package in Playwright Chromium through a local Vite fixture page. They cover native accessibility semantics, password redaction, stable locator ambiguity, form events, control execution, asynchronous page changes, and open shadow roots. Vitest remains responsible for fast framework-neutral core tests and unit coverage gates.
 
 ## License
 

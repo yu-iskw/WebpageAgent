@@ -56,5 +56,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install Chromium
+        run: pnpm --filter @webpage-agent/dom exec playwright install --with-deps chromium
+
       - name: Run tests
         run: pnpm test
+
+      - name: Upload browser test artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v6
+        with:
+          if-no-files-found: ignore
+          name: playwright-report
+          path: |
+            packages/dom/playwright-report/
+            packages/dom/test-results/
+          retention-days: 7

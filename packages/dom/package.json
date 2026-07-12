@@ -17,12 +17,13 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "vitest run"
+    "test": "pnpm test:typecheck && playwright test --config playwright.config.ts",
+    "test:typecheck": "tsc --project tests/tsconfig.json"
   },
   "dependencies": {
     "@webpage-agent/core": "workspace:*"
   },
   "devDependencies": {
-    "happy-dom": "20.10.6"
+    "@playwright/test": "1.61.1"
   }
 }

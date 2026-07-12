@@ -26,7 +26,7 @@ Production-ready **TypeScript monorepo** template:
 ```bash
 pnpm install    # Dependencies (includes Trunk launcher; use pnpm lint/format below)
 pnpm build      # Build all packages
-pnpm test       # Vitest across the workspace
+pnpm test       # Vitest unit tests + Playwright Chromium integration tests
 pnpm lint       # Trunk linters
 pnpm format     # Trunk formatters
 pnpm clean      # Clean build artifacts
@@ -66,6 +66,7 @@ Split so agents and CI get consistent, low-conflict feedback:
 
 - Tests in `tests/` or colocated `*.test.ts`
 - **Vitest** for unit and integration tests
+- **Playwright Chromium** for real-browser DOM integration tests (`pnpm --filter @webpage-agent/dom exec playwright install chromium` once locally)
 - Aim for strong coverage on core logic
 - Run `pnpm test` before committing
 
