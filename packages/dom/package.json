@@ -1,0 +1,29 @@
+{
+  "name": "@webpage-agent/dom",
+  "version": "0.1.0",
+  "description": "DOM and accessibility observer and deterministic executor for WebpageAgent.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "test": "pnpm test:typecheck && playwright test --config playwright.config.ts",
+    "test:typecheck": "tsc --project tests/tsconfig.json"
+  },
+  "dependencies": {
+    "@webpage-agent/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1"
+  }
+}

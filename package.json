@@ -1,13 +1,20 @@
 {
-  "name": "typescript-template",
-  "version": "1.0.0",
+  "name": "webpage-agent",
+  "version": "0.1.0",
   "private": true,
-  "description": "",
-  "keywords": [],
+  "description": "A policy-aware, deterministic web interaction runtime for applications and AI agents.",
+  "keywords": [
+    "agent",
+    "browser",
+    "dom",
+    "accessibility",
+    "automation"
+  ],
   "license": "Apache-2.0",
   "author": "",
   "scripts": {
     "build": "pnpm --recursive build",
+    "clean": "pnpm --recursive exec rm -rf dist coverage",
     "trunk": "trunk",
     "format": "pnpm format:trunk",
     "format:all": "pnpm format:trunk-all",
@@ -24,7 +31,9 @@
     "security:grype": "grype .",
     "knip": "knip",
     "codeql:local": "bash dev/codeql.sh",
-    "test": "vitest run",
+    "test": "pnpm --recursive --if-present test",
+    "test:unit": "vitest run",
+    "test:browser": "pnpm --filter @webpage-agent/dom test",
     "coverage": "vitest run --coverage",
     "coverage:watch": "vitest --coverage"
   },

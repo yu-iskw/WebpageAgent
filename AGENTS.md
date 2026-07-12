@@ -26,7 +26,7 @@ Production-ready **TypeScript monorepo** template:
 ```bash
 pnpm install    # Dependencies (includes Trunk launcher; use pnpm lint/format below)
 pnpm build      # Build all packages
-pnpm test       # Vitest across the workspace
+pnpm test       # Vitest unit tests + Playwright Chromium integration tests
 pnpm lint       # Trunk linters
 pnpm format     # Trunk formatters
 pnpm clean      # Clean build artifacts
@@ -66,6 +66,7 @@ Split so agents and CI get consistent, low-conflict feedback:
 
 - Tests in `tests/` or colocated `*.test.ts`
 - **Vitest** for unit and integration tests
+- **Playwright Chromium** for real-browser DOM integration tests (`pnpm --filter @webpage-agent/dom exec playwright install chromium` once locally)
 - Aim for strong coverage on core logic
 - Run `pnpm test` before committing
 
@@ -108,6 +109,7 @@ When you want durable fixes (not one-off chat advice):
 
 - Always use **pnpm**, not npm or yarn
 - **Supply chain:** `minimumReleaseAge` is **7 days** (new registry versions are not installed until that age). `blockExoticSubdeps` is **on**. If install fails with ignored build scripts, run **`pnpm approve-builds`** or add the package under **`allowBuilds`** in `pnpm-workspace.yaml`.
+- **Incomplete registry metadata:** pnpm can report `ERR_PNPM_MISSING_TIME` while enforcing `minimumReleaseAge`. Do not persistently disable the quarantine. If installation is required for local diagnosis, use a temporary override, restore `minimumReleaseAge: 10080` immediately, and review the lockfile before handoff.
 - Do not install Trunk-managed linters globally; versions live in `.trunk/trunk.yaml`
 - Commit **`pnpm-lock.yaml`**
 - After `pnpm install`, Trunk is under `node_modules/.bin`; pin is in `.trunk/trunk.yaml` (`cli.version`). Run `pnpm exec trunk install` if formatters/linters are missing

@@ -9,6 +9,8 @@ export default defineConfig({
       exclude: [
         'packages/*/src/**/*.{test,spec}.ts',
         'packages/*/src/**/*.d.ts',
+        'packages/*/src/{contracts,index,types}.ts',
+        'packages/dom/src/**/*.ts',
         'packages/*/dist/**',
         '**/*.config.{js,mjs,cjs,ts}',
       ],
